@@ -1,5 +1,7 @@
 #search-bar {
     display: flex;
+    margin: 0 6rem;
+    margin-bottom: 2rem;
 
     .search-bar {
         width: 300px;
@@ -8,11 +10,25 @@
         padding: 1rem;
         box-shadow: 0 .1rem .2rem rgba(0,0,0,.2);
         border-radius: 3px;
-        margin-bottom: 2rem;
-        margin-left: 6rem;
     
         @media screen and (max-width: 768px) {
             margin: 2rem auto;
         }
+    }
+
+    select {
+        background-color: white;
+        text-align: center;
+        border: 0;
+        margin-left: 2rem;
+        padding: 0 1rem;
+        border-radius: 3px;
+        box-shadow: 0 .1rem .2rem rgba(0,0,0,.2);
+
+        // Get rid of dropdown arrow
+        /* for Firefox */
+        -moz-appearance: none;
+        /* for Safari, Chrome, Opera */
+        -webkit-appearance: none;
     }
 }

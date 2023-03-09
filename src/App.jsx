@@ -9,14 +9,14 @@ function App() {
 
   const [countries, setCountries] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
-  // const [searchResults, setSearchResults] = useState([])
+  const [region, setRegion] = useState('')
 
   const getCountries = async () => {
     const response = await fetch('https://restcountries.com/v3.1/all');
-    const countryData = await response.json();
+    const data = await response.json();
 
-    setCountries(countryData)
-    console.log(countryData)
+    setCountries(data)
+    console.log(data)
   }
 
   const searchCountries = async () => {
@@ -24,6 +24,13 @@ function App() {
       const data = await response.json();
 
       setCountries(data);
+  }
+
+  const filterRegion = async () => {
+      const response = await fetch(`https://restcountries.com/v3.1/region/${region}`)
+      const data = await response.json();
+
+      setCountries(data)
   }
 
   useEffect(()=> {
@@ -36,10 +43,18 @@ function App() {
     }
   }, [searchQuery])
 
+  useEffect(() => {
+    if(region !== '') {
+      filterRegion()
+    } else {
+      getCountries()
+    }
+  }, [region])
+
   return (
     <div className="App">
       <Nav />
-      <SearchBar setSearchQuery={setSearchQuery}/>
+      <SearchBar setSearchQuery={setSearchQuery} setRegion = {setRegion} />
       <Country countries={countries}/>
     </div>
   )
